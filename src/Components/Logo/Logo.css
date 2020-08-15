@@ -1,0 +1,11 @@
+.Tilt{
+    background: purple;
+}
+.logo{
+    height: 220px;
+}
+
+.tilt-container{
+    display: flex;
+    justify-content: center;
+}
