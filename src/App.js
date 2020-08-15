@@ -8,23 +8,25 @@ import SignIn from './Components/SignIn/SignIn.js'
 import Register from './Components/Register/Register.js'
 import './App.css';
 
+const defaultState = {
+  input: '',
+  imageUrl: '',
+  box: {},
+  route: 'signIn',
+  isSignedIn: false,
+  user: {
+    id: '',
+    name: '',
+    email: '',
+    entries: '',
+    joined: ''
+  }
+}
+
 class App extends Component {
   constructor(){
     super();
-    this.state = {
-      input: '',
-      imageUrl: '',
-      box: {},
-      route: 'signIn',
-      isSignedIn: false,
-      user: {
-        id: '',
-        name: '',
-        email: '',
-        entries: '',
-        joined: ''
-      }
-    }
+    this.state = defaultState;
   }
   
   calculateFaceLocation = (data) => {
@@ -55,20 +57,7 @@ class App extends Component {
   }
 
   resetState = () => {
-    this.setState({
-      input: '',
-      imageUrl: '',
-      box: {},
-      route: 'signIn',
-      isSignedIn: false,
-      user: {
-        id: '',
-        name: '',
-        email: '',
-        entries: '',
-        joined: ''
-      }
-    })
+    this.setState(defaultState)
 }
 
   onInputChange = (event) => {
@@ -111,15 +100,12 @@ class App extends Component {
   onRouteChange = (r, login) => {
       this.setState({isSignedIn: login});
       this.setState({route: r});
-      if(!login){
-        this.resetState();
-      }
   }
   
   render(){
   return (
     <div className= 'App'>
-      <Navigation onRouteChange={this.onRouteChange} isSignedIn={this.state.isSignedIn}/>
+      <Navigation resetState={this.resetState} onRouteChange={this.onRouteChange} isSignedIn={this.state.isSignedIn}/>
       {this.state.route === 'home' 
       ? <div>
       <Logo/>
